@@ -27,7 +27,9 @@ function shuffle(array) {
 
 /* The clicks are still not working correctly here */
 $( '.card' ).on( 'click' , function() {
-  $( this ).toggle( '.deck .card.open' );
+  // $( this ).toggle( '.open' );
+  // $( this ).toggle( '.open' );
+  $( this ).addClass( 'open show' );
 });
 
 /*
