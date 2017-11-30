@@ -25,6 +25,10 @@ function shuffle(array) {
     return array;
 }
 
+/* The clicks are still not working correctly here */
+$( '.card' ).on( 'click' , function() {
+  $( this ).toggle( '.deck .card.open' );
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
