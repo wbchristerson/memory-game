@@ -6,6 +6,9 @@ let imageList = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
                  'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube',
                  'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 
+let cardPicked = false;
+let firstElem, secondElem;
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -47,7 +50,29 @@ implementShuffle(imageList);
 $( '.card' ).on( 'click' , function() {
   // $( this ).toggle( '.open' );
   // $( this ).toggle( '.open' );
-  $( this ).addClass( 'open show' );
+  let cardClass = $( this ).attr( 'class' );
+  if ((!cardPicked) && (cardClass !== 'card open show' ) &&
+      (cardClass !== 'card match' )) {
+    cardPicked = true;
+    $( this ).addClass( 'open show' );
+    // firstElem = $( this ).children('i').attr('class');
+    firstElem = $( this ).children( 'i' );
+    console.log(firstElem.attr( 'class' ));
+  }
+  else if ((cardClass !== 'card open show' ) && (cardClass !== 'card match' )) {
+    cardPicked = false;
+    $( this ).addClass( 'open show' );
+    // secondElem = $( this ).children('i').attr('class');
+    secondElem = $( this ).children( 'i' );
+    // $( this ).removeClass( 'open show' );
+    firstElem.parent().removeClass( 'open show' );
+    secondElem.parent().removeClass( 'open show' );
+    if (firstElem.parent().attr( 'class' ) === secondElem.parent().attr( 'class' )) {
+      firstElem.parent().addClass( 'match' );
+      secondElem.parent().removeClass( 'match' );
+    }
+    console.log(secondElem.attr( 'class' ));
+  }
 });
 
 /*
