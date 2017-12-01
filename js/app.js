@@ -7,6 +7,7 @@ let imageList = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
                  'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 
 let cardPicked = false;
+let lookCards = true;
 let firstElem, secondElem;
 
 /*
@@ -45,33 +46,56 @@ function implementShuffle(array) {
 }
 
 
+function showPair(elemA, elemB) {
+  elemA.parent().removeClass( 'open show' );
+  elemB.parent().removeClass( 'open show' );
+  lookCards = true;
+}
+
+
 implementShuffle(imageList);
 
 $( '.card' ).on( 'click' , function() {
   // $( this ).toggle( '.open' );
-  // $( this ).toggle( '.open' );
-  let cardClass = $( this ).attr( 'class' );
-  if ((!cardPicked) && (cardClass !== 'card open show' ) &&
-      (cardClass !== 'card match' )) {
-    cardPicked = true;
-    $( this ).addClass( 'open show' );
-    // firstElem = $( this ).children('i').attr('class');
-    firstElem = $( this ).children( 'i' );
-    console.log(firstElem.attr( 'class' ));
-  }
-  else if ((cardClass !== 'card open show' ) && (cardClass !== 'card match' )) {
-    cardPicked = false;
-    $( this ).addClass( 'open show' );
-    // secondElem = $( this ).children('i').attr('class');
-    secondElem = $( this ).children( 'i' );
-    // $( this ).removeClass( 'open show' );
-    firstElem.parent().removeClass( 'open show' );
-    secondElem.parent().removeClass( 'open show' );
-    if (firstElem.parent().attr( 'class' ) === secondElem.parent().attr( 'class' )) {
-      firstElem.parent().addClass( 'match' );
-      secondElem.parent().removeClass( 'match' );
+  if (lookCards) {
+    let cardClass = $( this ).attr( 'class' );
+    if ((!cardPicked) && (cardClass !== 'card open show' ) &&
+        (cardClass !== 'card match' )) {
+          cardPicked = true;
+          $( this ).addClass( 'open show' );
+          // firstElem = $( this ).children('i').attr('class');
+          firstElem = $( this ).children( 'i' );
+          console.log(firstElem.attr( 'class' ));
+        }
+    else if ((cardClass !== 'card open show' ) && (cardClass !== 'card match' )) {
+      cardPicked = false;
+      lookCards = false;
+      $( this ).addClass( 'open show' );
+      // secondElem = $( this ).children('i').attr('class');
+      secondElem = $( this ).children( 'i' );
+      // firstElem.parent().removeClass( 'open show' );
+      // secondElem.parent().removeClass( 'open show' );
+      /*
+      setTimeout(function(){
+        showPair(firstElem, secondElem);
+      }, 2000);
+      */
+      // lookCards = true;
+
+      if (firstElem.attr( 'class' ) === secondElem.attr( 'class' )) {
+        showPair(firstElem, secondElem);
+        firstElem.parent().addClass( 'match' );
+        secondElem.parent().addClass( 'match' );
+      }
+
+      else {
+        setTimeout(function(){
+          showPair(firstElem, secondElem);
+        }, 2000);
+      }
+
+      console.log(secondElem.attr( 'class' ));
     }
-    console.log(secondElem.attr( 'class' ));
   }
 });
 
