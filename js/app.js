@@ -53,6 +53,13 @@ function showPair(elemA, elemB) {
 }
 
 
+function restart() {
+  $( '.deck' ).children().attr( 'class' , 'card' );
+  $( '.card' ).children().attr( 'class' , 'fa' );
+  implementShuffle(imageList);
+}
+
+
 implementShuffle(imageList);
 
 $( '.card' ).on( 'click' , function() {
@@ -97,6 +104,11 @@ $( '.card' ).on( 'click' , function() {
       console.log(secondElem.attr( 'class' ));
     }
   }
+});
+
+$( '.restart' ).on( 'click' , function() {
+  restart();
+  console.log('restart');
 });
 
 /*
