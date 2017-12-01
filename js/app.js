@@ -1,7 +1,10 @@
 /*
  * Create a list that holds all of your cards
  */
-
+let imageList = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
+                 'fa-cube', 'fa-leaf', 'fa-bicycle', 'fa-bomb', 'fa-diamond',
+                 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube',
+                 'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 
 /*
  * Display the cards on the page
@@ -25,7 +28,22 @@ function shuffle(array) {
     return array;
 }
 
-/* The clicks are still not working correctly here */
+
+function implementShuffle(array) {
+    let shuffledArray = shuffle(array);
+    let currentCard = $( '.card' ).first();
+    // let currentCard = $( '.fa' ).first();
+    for (let i = 0; i < shuffledArray.length; i++) {
+      currentCard.children('i').addClass(shuffledArray[i]);
+      // currentCard.children( '.fa' ).first();
+      currentCard = currentCard.next();
+      // console.log(shuffledArray[i]);
+    }
+}
+
+
+implementShuffle(imageList);
+
 $( '.card' ).on( 'click' , function() {
   // $( this ).toggle( '.open' );
   // $( this ).toggle( '.open' );
