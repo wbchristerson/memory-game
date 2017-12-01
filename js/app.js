@@ -54,6 +54,7 @@ function showPair(elemA, elemB) {
 }
 
 
+<<<<<<< HEAD
 function restart() {
   $( '.deck' ).children().attr( 'class' , 'card' );
   $( '.card' ).children().attr( 'class' , 'fa' );
@@ -63,6 +64,16 @@ function restart() {
 }
 
 
+||||||| merged common ancestors
+=======
+function restart() {
+  $( '.deck' ).children().attr( 'class' , 'card' );
+  $( '.card' ).children().attr( 'class' , 'fa' );
+  implementShuffle(imageList);
+}
+
+
+>>>>>>> 54406d2b36799a8ec96f0f1da991df5153672d5c
 implementShuffle(imageList);
 
 $( '.card' ).on( 'click' , function() {
