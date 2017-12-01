@@ -11,6 +11,7 @@ let lookCards = true;
 let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
+let unmatchedCards = 16;
 
 /*
  * Display the cards on the page
@@ -61,6 +62,7 @@ function restart() {
   timeCount = 0;
   $( '.timer' ).text( '00:00:00' );
   $( '.fa-star-o' ).removeClass( 'fa-star-o' ).addClass( 'fa-star' );
+  unmatchedCards = 16;
 }
 
 
@@ -72,6 +74,15 @@ function demerit(star) {
   }
   elem.children().removeClass('fa-star').addClass('fa-star-o');
 }
+
+
+function endPage() {
+  $( '.modal' ).toggle();
+  $( '.container' ).toggle();
+  $( 'body' ).css( 'background' , '#ffffff' );
+}
+
+
 
 
 implementShuffle(imageList);
@@ -131,6 +142,7 @@ $( '.card' ).on( 'click' , function() {
         showPair(firstElem, secondElem);
         firstElem.parent().addClass( 'match' );
         secondElem.parent().addClass( 'match' );
+        unmatchedCards -= 2;
       }
 
       else {
@@ -154,7 +166,10 @@ $( '.card' ).on( 'click' , function() {
       if (moveCount > 25) {
         demerit(2);
       }
-      // console.log(secondElem.attr( 'class' ));
+
+      if (unmatchedCards === 0) {
+        endPage();
+      }
     }
   }
 });
