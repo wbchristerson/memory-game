@@ -9,6 +9,7 @@ let imageList = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
 let cardPicked = false;
 let lookCards = true;
 let firstElem, secondElem;
+let moveCount = 0;
 
 /*
  * Display the cards on the page
@@ -57,6 +58,8 @@ function restart() {
   $( '.deck' ).children().attr( 'class' , 'card' );
   $( '.card' ).children().attr( 'class' , 'fa' );
   implementShuffle(imageList);
+  moveCount = 0;
+  $( '.moves' ).text( String(moveCount) + ' Moves');
 }
 
 
@@ -72,7 +75,7 @@ $( '.card' ).on( 'click' , function() {
           $( this ).addClass( 'open show' );
           // firstElem = $( this ).children('i').attr('class');
           firstElem = $( this ).children( 'i' );
-          console.log(firstElem.attr( 'class' ));
+          // console.log(firstElem.attr( 'class' ));
         }
     else if ((cardClass !== 'card open show' ) && (cardClass !== 'card match' )) {
       cardPicked = false;
@@ -101,14 +104,21 @@ $( '.card' ).on( 'click' , function() {
         }, 2000);
       }
 
-      console.log(secondElem.attr( 'class' ));
+      moveCount++;
+      if (moveCount === 1) {
+        $( '.moves' ).text( String(moveCount) + ' Move');
+      }
+      else {
+        $( '.moves' ).text( String(moveCount) + ' Moves');
+      }
+
+      // console.log(secondElem.attr( 'class' ));
     }
   }
 });
 
 $( '.restart' ).on( 'click' , function() {
   restart();
-  console.log('restart');
 });
 
 /*
