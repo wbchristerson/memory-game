@@ -8,8 +8,9 @@ let imageList = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
 
 let cardPicked = false;
 let lookCards = true;
-let firstElem, secondElem;
+let firstElem, secondElem, timer;
 let moveCount = 0;
+let timeCount = 0;
 
 /*
  * Display the cards on the page
@@ -54,27 +55,51 @@ function showPair(elemA, elemB) {
 }
 
 
-<<<<<<< HEAD
 function restart() {
   $( '.deck' ).children().attr( 'class' , 'card' );
   $( '.card' ).children().attr( 'class' , 'fa' );
   implementShuffle(imageList);
   moveCount = 0;
   $( '.moves' ).text( String(moveCount) + ' Moves');
+  timeCount = 0;
+  $( '.timer' ).text( '00:00:00' );
 }
 
 
-||||||| merged common ancestors
-=======
+/*
 function restart() {
   $( '.deck' ).children().attr( 'class' , 'card' );
   $( '.card' ).children().attr( 'class' , 'fa' );
   implementShuffle(imageList);
 }
+*/
 
-
->>>>>>> 54406d2b36799a8ec96f0f1da991df5153672d5c
 implementShuffle(imageList);
+
+
+timer = setInterval(function() {
+  timeCount++;
+  let hour = Math.floor(timeCount / 3600);
+  let minute = Math.floor((timeCount % 3600) / 60);
+  let second = timeCount % 60;
+  let hourString = String(hour);
+  let minuteString = String(minute);
+  let secondString = String(second);
+  let timeString;
+  if (hour < 10) {
+    hourString = '0' + hourString;
+  }
+  if (minuteString < 10) {
+    minuteString = '0' + minuteString;
+  }
+  if (secondString < 10) {
+    secondString = '0' + secondString;
+  }
+  timeString = hourString + ':' + minuteString + ':' + secondString;
+  $( '.timer' ).text( timeString );
+  // timeCount++;
+}, 1000);
+
 
 $( '.card' ).on( 'click' , function() {
   // $( this ).toggle( '.open' );
