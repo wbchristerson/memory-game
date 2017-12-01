@@ -38,12 +38,9 @@ function shuffle(array) {
 function implementShuffle(array) {
     let shuffledArray = shuffle(array);
     let currentCard = $( '.card' ).first();
-    // let currentCard = $( '.fa' ).first();
     for (let i = 0; i < shuffledArray.length; i++) {
       currentCard.children('i').addClass(shuffledArray[i]);
-      // currentCard.children( '.fa' ).first();
       currentCard = currentCard.next();
-      // console.log(shuffledArray[i]);
     }
 }
 
@@ -63,16 +60,19 @@ function restart() {
   $( '.moves' ).text( String(moveCount) + ' Moves');
   timeCount = 0;
   $( '.timer' ).text( '00:00:00' );
+  $( '.fa-star-o' ).removeClass( 'fa-star-o' ).addClass( 'fa-star' );
 }
 
 
-/*
-function restart() {
-  $( '.deck' ).children().attr( 'class' , 'card' );
-  $( '.card' ).children().attr( 'class' , 'fa' );
-  implementShuffle(imageList);
+// assume star is either 2 or 3
+function demerit(star) {
+  let elem = $( '.stars' ).children().first();
+  for (let i = 0; i < star - 1; i++) {
+    elem = elem.next();
+  }
+  elem.children().removeClass('fa-star').addClass('fa-star-o');
 }
-*/
+
 
 implementShuffle(imageList);
 
@@ -97,7 +97,6 @@ timer = setInterval(function() {
   }
   timeString = hourString + ':' + minuteString + ':' + secondString;
   $( '.timer' ).text( timeString );
-  // timeCount++;
 }, 1000);
 
 
@@ -148,6 +147,13 @@ $( '.card' ).on( 'click' , function() {
         $( '.moves' ).text( String(moveCount) + ' Moves');
       }
 
+      if ((moveCount > 20) && (moveCount <= 25)) {
+        demerit(3);
+      }
+
+      if (moveCount > 25) {
+        demerit(2);
+      }
       // console.log(secondElem.attr( 'class' ));
     }
   }
