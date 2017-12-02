@@ -39,7 +39,8 @@ h1 {
 
 .deck {
     width: 660px;
-    min-height: 680px;
+    /*min-height: 680px;*/
+    height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
     border-radius: 10px;
@@ -149,4 +150,34 @@ h1 {
   margin: 5% auto;
   border-radius: 10px;
   /*box-shadow: 2px 2px black;*/
+}
+
+@media screen and (max-width: 620px) {
+  .deck {
+    width: 80%;
+    padding: 5%;
+    height: 80%;
+    justify-content: space-between;
+  }
+
+  .deck .card {
+    width: 22%;
+    padding-top: 30%;
+    /*height: 10%;*/
+    height: 25%;
+  }
+
+  .score-panel {
+    width: 90%;
+  }
+
+  .deck .card.show {
+      font-size: 16px;
+  }
+
+  .deck .card.match {
+      cursor: default;
+      background: #02ccba;
+      font-size: 16px;
+  }
 }
