@@ -56,15 +56,16 @@ function showPair(elemA, elemB) {
 
 
 function restart() {
+  cardPicked = false;
+  unmatchedCards = 16;
+  moveCount = 0;
+  timeCount = 0;
   $( '.deck' ).children().attr( 'class' , 'card' );
   $( '.card' ).children().attr( 'class' , 'fa' );
   implementShuffle(imageList);
-  moveCount = 0;
   $( '.moves' ).text( String(moveCount) + ' Moves');
-  timeCount = 0;
   $( '.timer' ).text( '00:00:00' );
   $( '.fa-star-o' ).removeClass( 'fa-star-o' ).addClass( 'fa-star' );
-  unmatchedCards = 16;
 }
 
 
@@ -90,7 +91,10 @@ function endPage() {
 function startPage() {
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
-  $( 'body' ).css( 'background' , "#ffffff url('../img/geometry2.png')");
+  let imageUrl = '../img/geometry2.png';
+  // $( 'body' ).css( 'background' , '#ffffff url("../img/geometry2.png")');
+  $( 'body' ).css( 'background' , '#ffffff' );
+  $( 'body' ).css( 'background-image' , 'url(' + imageUrl + ')')
   stillPlaying = true;
   restart();
 }
@@ -182,7 +186,11 @@ $( '.card' ).on( 'click' , function() {
       }
 
       if (unmatchedCards === 0) {
-        endPage();
+        setTimeout(function(){
+          // showPair(firstElem, secondElem);
+          endPage();
+        }, 500);
+        // endPage();
       }
     }
   }
@@ -190,6 +198,10 @@ $( '.card' ).on( 'click' , function() {
 
 $( '.restart' ).on( 'click' , function() {
   restart();
+});
+
+$( '.play-again' ).click(function() {
+  startPage();
 });
 
 /*
