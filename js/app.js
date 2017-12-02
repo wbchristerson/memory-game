@@ -11,7 +11,9 @@ let lookCards = true;
 let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
-let unmatchedCards = 16;
+// let unmatchedCards = 16;
+let unmatchedCards = 0;
+let stillPlaying = true;
 
 /*
  * Display the cards on the page
@@ -80,8 +82,18 @@ function endPage() {
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
   $( 'body' ).css( 'background' , '#ffffff' );
+  stillPlaying = false;
+
 }
 
+
+function startPage() {
+  $( '.modal' ).toggle();
+  $( '.container' ).toggle();
+  $( 'body' ).css( 'background' , "#ffffff url('../img/geometry2.png')");
+  stillPlaying = true;
+  restart();
+}
 
 
 
@@ -89,25 +101,27 @@ implementShuffle(imageList);
 
 
 timer = setInterval(function() {
-  timeCount++;
-  let hour = Math.floor(timeCount / 3600);
-  let minute = Math.floor((timeCount % 3600) / 60);
-  let second = timeCount % 60;
-  let hourString = String(hour);
-  let minuteString = String(minute);
-  let secondString = String(second);
-  let timeString;
-  if (hour < 10) {
-    hourString = '0' + hourString;
+  if (stillPlaying) {
+    timeCount++;
+    let hour = Math.floor(timeCount / 3600);
+    let minute = Math.floor((timeCount % 3600) / 60);
+    let second = timeCount % 60;
+    let hourString = String(hour);
+    let minuteString = String(minute);
+    let secondString = String(second);
+    let timeString;
+    if (hour < 10) {
+      hourString = '0' + hourString;
+    }
+    if (minuteString < 10) {
+      minuteString = '0' + minuteString;
+    }
+    if (secondString < 10) {
+      secondString = '0' + secondString;
+    }
+    timeString = hourString + ':' + minuteString + ':' + secondString;
+    $( '.timer' ).text( timeString );
   }
-  if (minuteString < 10) {
-    minuteString = '0' + minuteString;
-  }
-  if (secondString < 10) {
-    secondString = '0' + secondString;
-  }
-  timeString = hourString + ':' + minuteString + ':' + secondString;
-  $( '.timer' ).text( timeString );
 }, 1000);
 
 

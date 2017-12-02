@@ -109,9 +109,6 @@ h1 {
     cursor: pointer;
 }
 
-/*.score-panel .timer {*/
-    /*justify-content: center;*/
-/*}*/
 
 .timer {
     padding-left: 20px;
@@ -121,9 +118,35 @@ h1 {
   display: none;
 }
 
-.modal-content h1 {
+.modal-content {
   position: absolute;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  width: 32%;
+}
+
+.modal-content h1 {
+  font-weight: 600;
+  padding: 0% 5%;
+}
+
+.modal-content h2 {
+  text-align: center;
+  font-weight: 300;
+}
+
+.play-again {
+  text-align: center;
+  font-weight: 700;
+  font-size: 130%;
+  cursor: pointer;
+  border: 1px black;
+  background: #d1d6c5;
+  padding: 2% 5%;
+  width: 35%;
+  margin: 5% auto;
+  border-radius: 10px;
+  /*box-shadow: 2px 2px black;*/
 }
