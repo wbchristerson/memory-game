@@ -91,10 +91,11 @@ function endPage() {
 function startPage() {
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
-  let imageUrl = '../img/geometry2.png';
-  // $( 'body' ).css( 'background' , '#ffffff url("../img/geometry2.png")');
-  $( 'body' ).css( 'background' , '#ffffff' );
-  $( 'body' ).css( 'background-image' , 'url(' + imageUrl + ')')
+  // let imageUrl = '../img/geometry2.png';
+  // let imageUrl = 'img/geometry2.png';
+  $( 'body' ).css( 'background' , '#ffffff url("img/geometry2.png")');
+  // $( 'body' ).css( 'background' , '#ffffff' );
+  // $( 'body' ).css( 'background-image' , 'url(' + '\'' + imageUrl + '\'' + ')')
   stillPlaying = true;
   restart();
 }
