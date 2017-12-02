@@ -11,9 +11,10 @@ let lookCards = true;
 let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
-// let unmatchedCards = 16;
-let unmatchedCards = 0;
+let unmatchedCards = 16;
+// let unmatchedCards = 0;
 let stillPlaying = true;
+let stars = 3;
 
 /*
  * Display the cards on the page
@@ -35,6 +36,28 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+
+function timeString(timeVal) {
+  let hour = Math.floor(timeVal / 3600);
+  let minute = Math.floor((timeVal % 3600) / 60);
+  let second = timeVal % 60;
+  let hourString = String(hour);
+  let minuteString = String(minute);
+  let secondString = String(second);
+  let ans;
+  if (hour < 10) {
+    hourString = '0' + hourString;
+  }
+  if (minuteString < 10) {
+    minuteString = '0' + minuteString;
+  }
+  if (secondString < 10) {
+    secondString = '0' + secondString;
+  }
+  ans = hourString + ':' + minuteString + ':' + secondString;
+  return ans;
 }
 
 
@@ -76,14 +99,22 @@ function demerit(star) {
     elem = elem.next();
   }
   elem.children().removeClass('fa-star').addClass('fa-star-o');
+  stars--;
 }
 
 
 function endPage() {
+  stillPlaying = false;
+  let elem = $( '.modal-content' ).children( 'h2' ).first();
+  let hours, minutes, seconds;
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
   $( 'body' ).css( 'background' , '#ffffff' );
-  stillPlaying = false;
+  elem.text('Moves: ' + String(moveCount));
+  elem = elem.next();
+  elem.text('Stars: ' + String(stars));
+  elem = elem.next();
+  elem.text('Time: ' + timeString(timeCount));
 
 }
 
@@ -91,11 +122,7 @@ function endPage() {
 function startPage() {
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
-  // let imageUrl = '../img/geometry2.png';
-  // let imageUrl = 'img/geometry2.png';
   $( 'body' ).css( 'background' , '#ffffff url("img/geometry2.png")');
-  // $( 'body' ).css( 'background' , '#ffffff' );
-  // $( 'body' ).css( 'background-image' , 'url(' + '\'' + imageUrl + '\'' + ')')
   stillPlaying = true;
   restart();
 }
@@ -108,24 +135,8 @@ implementShuffle(imageList);
 timer = setInterval(function() {
   if (stillPlaying) {
     timeCount++;
-    let hour = Math.floor(timeCount / 3600);
-    let minute = Math.floor((timeCount % 3600) / 60);
-    let second = timeCount % 60;
-    let hourString = String(hour);
-    let minuteString = String(minute);
-    let secondString = String(second);
-    let timeString;
-    if (hour < 10) {
-      hourString = '0' + hourString;
-    }
-    if (minuteString < 10) {
-      minuteString = '0' + minuteString;
-    }
-    if (secondString < 10) {
-      secondString = '0' + secondString;
-    }
-    timeString = hourString + ':' + minuteString + ':' + secondString;
-    $( '.timer' ).text( timeString );
+
+    $( '.timer' ).text( timeString(timeCount) );
   }
 }, 1000);
 
