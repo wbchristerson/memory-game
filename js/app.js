@@ -11,8 +11,8 @@ let lookCards = true;
 let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
-// let unmatchedCards = 16;
-let unmatchedCards = 0;
+let unmatchedCards = 16;
+// let unmatchedCards = 0;
 let stillPlaying = true;
 let stars = 3;
 
@@ -144,29 +144,64 @@ timer = setInterval(function() {
 
 $( '.card' ).on( 'click' , function() {
   if (lookCards) {
+
+    // $( this ).animate({
+    //   transform: 'rotate(180deg)'
+    // }, {
+    //   duration: 5000,
+    //   iterations: 5
+    // });
+
+    // $( '.card' ).click( function() {
+
+
+    // $( this ).toggleClass( 'flip' );
+
+
+    // });
+
     let cardClass = $( this ).attr( 'class' );
     if ((!cardPicked) && (cardClass !== 'card open show' ) &&
         (cardClass !== 'card match' )) {
           cardPicked = true;
+
+
+          // $(document).ready(function() {
+            // $( '.card' ).click( function() {
+            //   $( this ).toggleClass( 'flip' );
+            // });
+          // });
+
+
+          /*
+          $( this ).animate({
+            transform: 'rotate(180deg)'
+          }, {
+            duration: 5000,
+            iterations: 5
+          });
+          */
+
+          // $( this ).removeClass( 'flip' ).delay(500);
           $( this ).addClass( 'open show' );
-          // firstElem = $( this ).children('i').attr('class');
           firstElem = $( this ).children( 'i' );
-          // console.log(firstElem.attr( 'class' ));
         }
     else if ((cardClass !== 'card open show' ) && (cardClass !== 'card match' )) {
       cardPicked = false;
       lookCards = false;
-      $( this ).addClass( 'open show' );
-      // secondElem = $( this ).children('i').attr('class');
+
+      // setTimeout(function(){
+        $( this ).addClass( 'open show' );
+      // }, 500);
+
+      // $( this ).removeClass( 'flip' );
+      // setTimeout(function(){
+
+
       secondElem = $( this ).children( 'i' );
-      // firstElem.parent().removeClass( 'open show' );
-      // secondElem.parent().removeClass( 'open show' );
-      /*
-      setTimeout(function(){
-        showPair(firstElem, secondElem);
-      }, 2000);
-      */
-      // lookCards = true;
+
+      // firstElem.parent().addClass( 'flip' );
+      // secondElem.parent().addClass( 'flip' );
 
       if (firstElem.attr( 'class' ) === secondElem.attr( 'class' )) {
         showPair(firstElem, secondElem);
@@ -175,12 +210,20 @@ $( '.card' ).on( 'click' , function() {
         unmatchedCards -= 2;
       }
 
+
       else {
         setTimeout(function(){
           showPair(firstElem, secondElem);
-        }, 2000);
-      // }, 100);
+        // }, 2000);
+        }, 500);
       }
+
+
+// }, 500);
+
+
+
+
 
       moveCount++;
       if (moveCount === 1) {
@@ -200,10 +243,8 @@ $( '.card' ).on( 'click' , function() {
 
       if (unmatchedCards === 0) {
         setTimeout(function(){
-          // showPair(firstElem, secondElem);
           endPage();
         }, 500);
-        // endPage();
       }
     }
   }
