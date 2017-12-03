@@ -166,14 +166,9 @@ h1 {
       height: 10%;
       margin-bottom: 10%;
       cursor: pointer;
-      /*height: 25%;*/
-      /*height: auto;*/
-      /*justify-content: center;*/
-      /*align-items: center;*/
   }
 
   .score-panel {
-      /*width: 90%;*/
       width: 80%;
   }
 
@@ -183,18 +178,14 @@ h1 {
       height: 10%;
       padding-top: 30%;
       margin-bottom: 10%;
-      justify-content: center;
-      align-items: center;
+  }
+
+  .card i {
+    transform: translate(0%, -150%);
   }
 
   .deck .card.open {
-      /*height: 10%;*/
-      /*margin-bottom: 10%;*/
-      /*margin-top: 10%;*/
-      /*height: 10%;*/
-      /*padding-top: 25%;*/
       padding-top: 23%;
-      /*margin-bottom: 10%;*/
       padding-bottom: 0%;
   }
 
@@ -202,7 +193,6 @@ h1 {
       cursor: default;
       background: #02ccba;
       font-size: 16px;
-      /*padding-top: 23%;*/
       padding-top: 24%;
       padding-bottom: 0%;
   }

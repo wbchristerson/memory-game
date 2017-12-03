@@ -178,8 +178,8 @@ $( '.card' ).on( 'click' , function() {
       else {
         setTimeout(function(){
           showPair(firstElem, secondElem);
-        // }, 2000);
-      }, 100);
+        }, 2000);
+      // }, 100);
       }
 
       moveCount++;
