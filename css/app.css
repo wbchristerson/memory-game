@@ -90,7 +90,6 @@ h1 {
     text-align: left;
     width: 345px;
     margin-bottom: 10px;
-    /*flex-direction: row;*/
 }
 
 .score-panel .stars {
@@ -131,6 +130,7 @@ h1 {
 .modal-content h1 {
     font-weight: 600;
     padding: 0% 5%;
+    text-align: center;
 }
 
 .modal-content h2 {
@@ -151,6 +151,14 @@ h1 {
     border-radius: 10px;
     box-shadow: 2px 2px black;
 }
+
+
+@media screen and (max-width: 800px) {
+  .modal-content {
+    width: 40%;
+  }
+}
+
 
 @media screen and (max-width: 620px) {
   .deck {
@@ -195,5 +203,9 @@ h1 {
       font-size: 16px;
       padding-top: 24%;
       padding-bottom: 0%;
+  }
+
+  .modal-content {
+    width: 100%;
   }
 }

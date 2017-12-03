@@ -11,8 +11,8 @@ let lookCards = true;
 let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
-let unmatchedCards = 16;
-// let unmatchedCards = 0;
+// let unmatchedCards = 16;
+let unmatchedCards = 0;
 let stillPlaying = true;
 let stars = 3;
 
