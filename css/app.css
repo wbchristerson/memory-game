@@ -202,7 +202,8 @@ h1 {
       cursor: default;
       background: #02ccba;
       font-size: 16px;
-      padding-top: 23%;
+      /*padding-top: 23%;*/
+      padding-top: 24%;
       padding-bottom: 0%;
   }
 }

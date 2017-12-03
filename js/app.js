@@ -83,6 +83,7 @@ function restart() {
   unmatchedCards = 16;
   moveCount = 0;
   timeCount = 0;
+  stars = 3;
   $( '.deck' ).children().attr( 'class' , 'card' );
   $( '.card' ).children().attr( 'class' , 'fa' );
   implementShuffle(imageList);
@@ -177,7 +178,8 @@ $( '.card' ).on( 'click' , function() {
       else {
         setTimeout(function(){
           showPair(firstElem, secondElem);
-        }, 2000);
+        // }, 2000);
+      }, 100);
       }
 
       moveCount++;
@@ -188,11 +190,11 @@ $( '.card' ).on( 'click' , function() {
         $( '.moves' ).text( String(moveCount) + ' Moves');
       }
 
-      if ((moveCount > 20) && (moveCount <= 25)) {
+      if ((moveCount > 20) && (stars === 3)) {
         demerit(3);
       }
 
-      if (moveCount > 25) {
+      if ((moveCount > 25) && (stars === 2)) {
         demerit(2);
       }
 
