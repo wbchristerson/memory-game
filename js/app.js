@@ -142,7 +142,6 @@ timer = setInterval(function() {
 
 
 $( '.card' ).on( 'click' , function() {
-  // $( this ).toggle( '.open' );
   if (lookCards) {
     let cardClass = $( this ).attr( 'class' );
     if ((!cardPicked) && (cardClass !== 'card open show' ) &&

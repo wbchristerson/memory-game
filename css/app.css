@@ -116,71 +116,93 @@ h1 {
 }
 
 .modal {
-  display: none;
+    display: none;
 }
 
 .modal-content {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-  width: 32%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    width: 32%;
 }
 
 .modal-content h1 {
-  font-weight: 600;
-  padding: 0% 5%;
+    font-weight: 600;
+    padding: 0% 5%;
 }
 
 .modal-content h2 {
-  text-align: center;
-  font-weight: 300;
+    text-align: center;
+    font-weight: 300;
 }
 
 .play-again {
-  text-align: center;
-  font-weight: 700;
-  font-size: 130%;
-  cursor: pointer;
-  border: 1px black;
-  background: #d1d6c5;
-  padding: 2% 5%;
-  width: 35%;
-  margin: 5% auto;
-  border-radius: 10px;
-  box-shadow: 2px 2px black;
+    text-align: center;
+    font-weight: 700;
+    font-size: 130%;
+    cursor: pointer;
+    border: 1px black;
+    background: #d1d6c5;
+    padding: 2% 5%;
+    width: 35%;
+    margin: 5% auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px black;
 }
 
 @media screen and (max-width: 620px) {
   .deck {
-    width: 80%;
-    padding: 5%;
-    height: 80%;
-    justify-content: space-between;
+      width: 80%;
+      padding: 5%;
+      height: 80%;
+      justify-content: space-between;
   }
 
   .deck .card {
-    width: 22%;
-    padding-top: 30%;
-    height: 10%;
-    margin-bottom: 10%;
-    /*height: 25%;*/
-    /*height: auto;*/
+      width: 22%;
+      padding-top: 30%;
+      height: 10%;
+      margin-bottom: 10%;
+      cursor: pointer;
+      /*height: 25%;*/
+      /*height: auto;*/
+      /*justify-content: center;*/
+      /*align-items: center;*/
   }
 
   .score-panel {
-    /*width: 90%;*/
-    width: 80%;
+      /*width: 90%;*/
+      width: 80%;
   }
 
   .deck .card.show {
       font-size: 16px;
+      cursor: default;
+      height: 10%;
+      padding-top: 30%;
+      margin-bottom: 10%;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .deck .card.open {
+      /*height: 10%;*/
+      /*margin-bottom: 10%;*/
+      /*margin-top: 10%;*/
+      /*height: 10%;*/
+      /*padding-top: 25%;*/
+      padding-top: 23%;
+      /*margin-bottom: 10%;*/
+      padding-bottom: 0%;
   }
 
   .deck .card.match {
       cursor: default;
       background: #02ccba;
       font-size: 16px;
+      padding-top: 23%;
+      padding-bottom: 0%;
   }
 }
