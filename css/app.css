@@ -163,12 +163,15 @@ h1 {
   .deck .card {
     width: 22%;
     padding-top: 30%;
-    /*height: 10%;*/
-    height: 25%;
+    height: 10%;
+    margin-bottom: 10%;
+    /*height: 25%;*/
+    /*height: auto;*/
   }
 
   .score-panel {
-    width: 90%;
+    /*width: 90%;*/
+    width: 80%;
   }
 
   .deck .card.show {
