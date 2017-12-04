@@ -1,6 +1,6 @@
 # Memory Game
 
-In this memory game the user must match 8 pairs of cards which are initially
+The user must match 8 pairs of cards which are initially
 all covered. When a card is clicked, it is flipped, illuminated in blue, and its
 corresponding symbol is made visible. When two matching cards have been selected
 in this way, they both remain visible and turn aquamarine; the user may then
