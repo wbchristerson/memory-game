@@ -181,7 +181,7 @@ $( '.card' ).on( 'click' , function() {
         $( '.moves' ).text( String(moveCount) + ' Moves');
       }
 
-      if ((moveCount > 20) && (stars === 3)) {
+      if ((moveCount > 15) && (stars === 3)) {
         demerit(3);
       }
 
