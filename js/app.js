@@ -6,14 +6,15 @@ let imageList = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
                  'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube',
                  'fa-leaf', 'fa-bicycle', 'fa-bomb'];
 
-let cardPicked = false;
-let lookCards = true;
+let cardPicked = false; // determines whether a first card for a pair has
+                        // been selected
+let lookCards = true; // determines whether new cards may be flipped
 let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
 let unmatchedCards = 16;
-// let unmatchedCards = 0;
-let stillPlaying = true;
+let stillPlaying = true; // determines whether the time counter should be
+                         // incrementing
 let stars = 3;
 
 /*
@@ -26,7 +27,6 @@ let stars = 3;
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -34,11 +34,11 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
 
 
+// make the string representing the time from the integral time counter
 function timeString(timeVal) {
   let hour = Math.floor(timeVal / 3600);
   let minute = Math.floor((timeVal % 3600) / 60);
@@ -61,16 +61,19 @@ function timeString(timeVal) {
 }
 
 
+// shuffles and organizes cards in HTML
 function implementShuffle(array) {
     let shuffledArray = shuffle(array);
     let currentCard = $( '.card' ).first();
     for (let i = 0; i < shuffledArray.length; i++) {
-      currentCard.children('i').addClass(shuffledArray[i]);
+      currentCard.children( 'i' ).addClass(shuffledArray[i]);
       currentCard = currentCard.next();
     }
 }
 
 
+// having shown a non-matching pair, re-flip the cards over and allow
+// more selections
 function showPair(elemA, elemB) {
   elemA.parent().removeClass( 'open show' );
   elemB.parent().removeClass( 'open show' );
@@ -78,6 +81,7 @@ function showPair(elemA, elemB) {
 }
 
 
+// reset the board and all statistics (including a new shuffling of the cards)
 function restart() {
   cardPicked = false;
   unmatchedCards = 16;
@@ -99,7 +103,7 @@ function demerit(star) {
   for (let i = 0; i < star - 1; i++) {
     elem = elem.next();
   }
-  elem.children().removeClass('fa-star').addClass('fa-star-o');
+  elem.children().removeClass( 'fa-star' ).addClass( 'fa-star-o' );
   stars--;
 }
 
@@ -116,16 +120,26 @@ function endPage() {
   elem.text('Stars: ' + String(stars));
   elem = elem.next();
   elem.text('Time: ' + timeString(timeCount));
-
 }
 
 
 function startPage() {
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
-  $( 'body' ).css( 'background' , '#ffffff url("img/geometry2.png")');
+  $( 'body' ).css( 'background' , '#ffffff url("img/geometry2.png")' );
   stillPlaying = true;
   restart();
+}
+
+
+function updateMoves() {
+  moveCount++;
+  if (moveCount === 1) {
+    $( '.moves' ).text( String(moveCount) + ' Move');
+  }
+  else {
+    $( '.moves' ).text( String(moveCount) + ' Moves');
+  }
 }
 
 
@@ -135,7 +149,6 @@ implementShuffle(imageList);
 timer = setInterval(function() {
   if (stillPlaying) {
     timeCount++;
-
     $( '.timer' ).text( timeString(timeCount) );
   }
 }, 1000);
@@ -173,15 +186,9 @@ $( '.card' ).on( 'click' , function() {
         secondElem.parent().toggleClass( 'flip' );
       }
 
-      moveCount++;
-      if (moveCount === 1) {
-        $( '.moves' ).text( String(moveCount) + ' Move');
-      }
-      else {
-        $( '.moves' ).text( String(moveCount) + ' Moves');
-      }
+      updateMoves();
 
-      if ((moveCount > 15) && (stars === 3)) {
+      if ((moveCount > 16) && (stars === 3)) {
         demerit(3);
       }
 
@@ -198,9 +205,11 @@ $( '.card' ).on( 'click' , function() {
   }
 });
 
+
 $( '.restart' ).on( 'click' , function() {
   restart();
 });
+
 
 $( '.play-again' ).click(function() {
   startPage();
