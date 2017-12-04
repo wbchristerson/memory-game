@@ -8,7 +8,11 @@ let imageList = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt',
 
 let cardPicked = false; // determines whether a first card for a pair has
                         // been selected
-let lookCards = true; // determines whether new cards may be flipped
+let lookCards = true; // determines whether new cards may be flipped, e.g.
+                      // during the pause between when two non-matching cards
+                      // are face up and when they are again flipped over to be
+                      // non-visible, lookCards should be false since no other
+                      // cards should be flipped at that time
 let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
@@ -38,7 +42,7 @@ function shuffle(array) {
 }
 
 
-// make the string representing the time from the integral time counter
+// make the string representing the time using the integral time counter
 function timeString(timeVal) {
   let hour = Math.floor(timeVal / 3600);
   let minute = Math.floor((timeVal % 3600) / 60);
@@ -73,7 +77,8 @@ function implementShuffle(array) {
 
 
 // having shown a non-matching pair, re-flip the cards over and allow
-// more selections
+// more selections; having shown a matching pair, remove current class to be
+// replaced with the 'match' class
 function showPair(elemA, elemB) {
   elemA.parent().removeClass( 'open show' );
   elemB.parent().removeClass( 'open show' );
@@ -83,21 +88,24 @@ function showPair(elemA, elemB) {
 
 // reset the board and all statistics (including a new shuffling of the cards)
 function restart() {
-  cardPicked = false;
-  stillPlaying = false;
-  unmatchedCards = 16;
+  cardPicked = false; // no first card should be picked at the start
+  stillPlaying = false; // the timer should not be running at the start of a
+                        // new game
+  unmatchedCards = 16; // all cards begin unmatched
   moveCount = 0;
   timeCount = 0;
   stars = 3;
   $( '.deck' ).children().attr( 'class' , 'card flip' );
   $( '.card' ).children().attr( 'class' , 'fa' );
-  implementShuffle(imageList);
-  $( '.moves' ).text( String(moveCount) + ' Moves');
-  $( '.timer' ).text( '00:00:00' );
+  implementShuffle(imageList); // re-shuffle the cards
+  $( '.moves' ).text( String(moveCount) + ' Moves'); // reset to '0 Moves'
+  $( '.timer' ).text( '00:00:00' ); // reset timer
   $( '.fa-star-o' ).removeClass( 'fa-star-o' ).addClass( 'fa-star' );
 }
 
 
+// decrement star rating by 1 and make the interior of the rightmost black-
+// interior star appear as white
 // assume star is either 2 or 3
 function demerit(star) {
   let elem = $( '.stars' ).children().first();
@@ -109,6 +117,8 @@ function demerit(star) {
 }
 
 
+// proceed to the modal after the game ends; stop the timer, make the display
+// no longer visible, show the end screen, and list the data
 function endPage() {
   stillPlaying = false;
   let elem = $( '.modal-content' ).children( 'h2' ).first();
@@ -124,6 +134,9 @@ function endPage() {
 }
 
 
+// when the 'play again' button is clicked on the modal page, make the modal
+// invisible and make the original tile page visible again; reset the
+// background image and reset all other information according to restart()
 function startPage() {
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
@@ -132,6 +145,8 @@ function startPage() {
 }
 
 
+// after a pair of cards has been clicked, update the move count and the
+// display for the number of moves
 function updateMoves() {
   moveCount++;
   if (moveCount === 1) {
@@ -143,6 +158,7 @@ function updateMoves() {
 }
 
 
+// if all cards have been matched, wait 500 milliseconds then execute endPage()
 function checkForFinish() {
   if (unmatchedCards === 0) {
     setTimeout(function(){
@@ -152,6 +168,8 @@ function checkForFinish() {
 }
 
 
+// beyond 16 moves, set the star rating to 2; beyond 25 moves, set the star
+// rating to 1
 function updateStars() {
   if ((moveCount > 16) && (stars === 3)) {
     demerit(3);
@@ -162,9 +180,11 @@ function updateStars() {
 }
 
 
+// do an initial shuffle and placement of the cards
 implementShuffle(imageList);
 
 
+// when the game is ongoing, increment the timer and its display each second
 timer = setInterval(function() {
   if (stillPlaying) {
     timeCount++;
@@ -173,39 +193,46 @@ timer = setInterval(function() {
 }, 1000);
 
 
+// the main event when cards are clicked
 $( '.card' ).on( 'click' , function() {
-  if (lookCards) {
+  if (lookCards) { // make sure a pair of cards is not already face up
     stillPlaying = true; // initially to set timer after first card click
     let elem = $( this );
     let cardClass = elem.attr( 'class' );
+    // below: if no first card has been chosen yet for a pair and the card is
+    // neither already open nor already matched, then enter this branch
     if ((!cardPicked) && (cardClass !== 'card open show' ) &&
         (cardClass !== 'card match' )) {
           cardPicked = true;
           firstElem = elem.children( 'i' );
-          elem.toggleClass( 'flip' );
-          elem.addClass( 'open show' );
+          elem.toggleClass( 'flip' ); // flip card
+          elem.addClass( 'open show' ); // expose card image
         }
+    // below: same conditions as above branch except with a first card already
+    // chosen for the pair
     else if ((cardClass !== 'card open show' ) &&
              (cardClass !== 'card match' )) {
-      elem.toggleClass( 'flip' );
+      elem.toggleClass( 'flip' ); // flip card
       cardPicked = false;
-      lookCards = false;
-      elem.addClass( 'open show' );
+      lookCards = false; // prevent more cards from being flipped over
+      elem.addClass( 'open show' ); // expose card image
       secondElem = elem.children( 'i' );
 
+      // below: if the two cards match, then enter this branch
       if (firstElem.attr( 'class' ) === secondElem.attr( 'class' )) {
-        showPair(firstElem, secondElem);
-        firstElem.parent().addClass( 'match' );
-        secondElem.parent().addClass( 'match' );
+        showPair(firstElem, secondElem); // remove 'open' and 'show' classes
+        firstElem.parent().addClass( 'match' ); // set card to match class
+        secondElem.parent().addClass( 'match' ); // set card to match class
         unmatchedCards -= 2;
       }
 
+      // below: if the two cards do not match, then enter this branch
       else {
-        setTimeout(function(){
+        setTimeout(function(){ // pause 1 second to show the cards' identities
           showPair(firstElem, secondElem);
         }, 1000);
-        firstElem.parent().toggleClass( 'flip' );
-        secondElem.parent().toggleClass( 'flip' );
+        firstElem.parent().toggleClass( 'flip' ); // flip over card
+        secondElem.parent().toggleClass( 'flip' ); // flip over card
       }
 
       updateMoves();
@@ -216,12 +243,12 @@ $( '.card' ).on( 'click' , function() {
 });
 
 
-$( '.restart' ).click(function() {
+$( '.restart' ).click(function() { // if the re-start arrow button is clicked
   restart();
 });
 
 
-$( '.play-again' ).click(function() {
+$( '.play-again' ).click(function() { // if the 'play again' button is clicked
   startPage();
 });
 
