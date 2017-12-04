@@ -13,8 +13,8 @@ let firstElem, secondElem, timer;
 let moveCount = 0;
 let timeCount = 0;
 let unmatchedCards = 16;
-let stillPlaying = true; // determines whether the time counter should be
-                         // incrementing
+let stillPlaying = false; // determines whether the time counter should be
+                          // incrementing
 let stars = 3;
 
 /*
@@ -84,6 +84,7 @@ function showPair(elemA, elemB) {
 // reset the board and all statistics (including a new shuffling of the cards)
 function restart() {
   cardPicked = false;
+  stillPlaying = false;
   unmatchedCards = 16;
   moveCount = 0;
   timeCount = 0;
@@ -127,7 +128,6 @@ function startPage() {
   $( '.modal' ).toggle();
   $( '.container' ).toggle();
   $( 'body' ).css( 'background' , '#ffffff url("img/geometry2.png")' );
-  stillPlaying = true;
   restart();
 }
 
@@ -175,6 +175,7 @@ timer = setInterval(function() {
 
 $( '.card' ).on( 'click' , function() {
   if (lookCards) {
+    stillPlaying = true; // initially to set timer after first card click
     let elem = $( this );
     let cardClass = elem.attr( 'class' );
     if ((!cardPicked) && (cardClass !== 'card open show' ) &&
