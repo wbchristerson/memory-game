@@ -84,7 +84,7 @@ function restart() {
   moveCount = 0;
   timeCount = 0;
   stars = 3;
-  $( '.deck' ).children().attr( 'class' , 'card' );
+  $( '.deck' ).children().attr( 'class' , 'card flip' );
   $( '.card' ).children().attr( 'class' , 'fa' );
   implementShuffle(imageList);
   $( '.moves' ).text( String(moveCount) + ' Moves');
@@ -129,7 +129,6 @@ function startPage() {
 }
 
 
-
 implementShuffle(imageList);
 
 
@@ -144,64 +143,20 @@ timer = setInterval(function() {
 
 $( '.card' ).on( 'click' , function() {
   if (lookCards) {
-
-    // $( this ).animate({
-    //   transform: 'rotate(180deg)'
-    // }, {
-    //   duration: 5000,
-    //   iterations: 5
-    // });
-
-    // $( '.card' ).click( function() {
-
-
-    // $( this ).toggleClass( 'flip' );
-
-
-    // });
-
     let cardClass = $( this ).attr( 'class' );
     if ((!cardPicked) && (cardClass !== 'card open show' ) &&
         (cardClass !== 'card match' )) {
           cardPicked = true;
-
-
-          // $(document).ready(function() {
-            // $( '.card' ).click( function() {
-            //   $( this ).toggleClass( 'flip' );
-            // });
-          // });
-
-
-          /*
-          $( this ).animate({
-            transform: 'rotate(180deg)'
-          }, {
-            duration: 5000,
-            iterations: 5
-          });
-          */
-
-          // $( this ).removeClass( 'flip' ).delay(500);
-          $( this ).addClass( 'open show' );
           firstElem = $( this ).children( 'i' );
+          $( this ).toggleClass( 'flip' );
+          $( this ).addClass( 'open show' );
         }
     else if ((cardClass !== 'card open show' ) && (cardClass !== 'card match' )) {
+      $( this ).toggleClass( 'flip' );
       cardPicked = false;
       lookCards = false;
-
-      // setTimeout(function(){
-        $( this ).addClass( 'open show' );
-      // }, 500);
-
-      // $( this ).removeClass( 'flip' );
-      // setTimeout(function(){
-
-
+      $( this ).addClass( 'open show' );
       secondElem = $( this ).children( 'i' );
-
-      // firstElem.parent().addClass( 'flip' );
-      // secondElem.parent().addClass( 'flip' );
 
       if (firstElem.attr( 'class' ) === secondElem.attr( 'class' )) {
         showPair(firstElem, secondElem);
@@ -210,20 +165,13 @@ $( '.card' ).on( 'click' , function() {
         unmatchedCards -= 2;
       }
 
-
       else {
         setTimeout(function(){
           showPair(firstElem, secondElem);
-        // }, 2000);
-        }, 500);
+        }, 1000);
+        firstElem.parent().toggleClass( 'flip' );
+        secondElem.parent().toggleClass( 'flip' );
       }
-
-
-// }, 500);
-
-
-
-
 
       moveCount++;
       if (moveCount === 1) {
