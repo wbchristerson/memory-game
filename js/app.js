@@ -143,6 +143,25 @@ function updateMoves() {
 }
 
 
+function checkForFinish() {
+  if (unmatchedCards === 0) {
+    setTimeout(function(){
+      endPage();
+    }, 500);
+  }
+}
+
+
+function updateStars() {
+  if ((moveCount > 16) && (stars === 3)) {
+    demerit(3);
+  }
+  if ((moveCount > 25) && (stars === 2)) {
+    demerit(2);
+  }
+}
+
+
 implementShuffle(imageList);
 
 
@@ -156,20 +175,22 @@ timer = setInterval(function() {
 
 $( '.card' ).on( 'click' , function() {
   if (lookCards) {
-    let cardClass = $( this ).attr( 'class' );
+    let elem = $( this );
+    let cardClass = elem.attr( 'class' );
     if ((!cardPicked) && (cardClass !== 'card open show' ) &&
         (cardClass !== 'card match' )) {
           cardPicked = true;
-          firstElem = $( this ).children( 'i' );
-          $( this ).toggleClass( 'flip' );
-          $( this ).addClass( 'open show' );
+          firstElem = elem.children( 'i' );
+          elem.toggleClass( 'flip' );
+          elem.addClass( 'open show' );
         }
-    else if ((cardClass !== 'card open show' ) && (cardClass !== 'card match' )) {
-      $( this ).toggleClass( 'flip' );
+    else if ((cardClass !== 'card open show' ) &&
+             (cardClass !== 'card match' )) {
+      elem.toggleClass( 'flip' );
       cardPicked = false;
       lookCards = false;
-      $( this ).addClass( 'open show' );
-      secondElem = $( this ).children( 'i' );
+      elem.addClass( 'open show' );
+      secondElem = elem.children( 'i' );
 
       if (firstElem.attr( 'class' ) === secondElem.attr( 'class' )) {
         showPair(firstElem, secondElem);
@@ -187,26 +208,14 @@ $( '.card' ).on( 'click' , function() {
       }
 
       updateMoves();
-
-      if ((moveCount > 16) && (stars === 3)) {
-        demerit(3);
-      }
-
-      if ((moveCount > 25) && (stars === 2)) {
-        demerit(2);
-      }
-
-      if (unmatchedCards === 0) {
-        setTimeout(function(){
-          endPage();
-        }, 500);
-      }
+      updateStars();
+      checkForFinish();
     }
   }
 });
 
 
-$( '.restart' ).on( 'click' , function() {
+$( '.restart' ).click(function() {
   restart();
 });
 

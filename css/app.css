@@ -39,7 +39,6 @@ h1 {
 
 .deck {
     width: 660px;
-    /*min-height: 680px;*/
     height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
     padding: 32px;
@@ -110,7 +109,6 @@ h1 {
     cursor: pointer;
 }
 
-
 .timer {
     padding-left: 20px;
 }
@@ -153,13 +151,11 @@ h1 {
     box-shadow: 2px 2px black;
 }
 
-
 @media screen and (max-width: 800px) {
   .modal-content {
     width: 40%;
   }
 }
-
 
 @media screen and (max-width: 650px) {
   .deck {
@@ -210,8 +206,6 @@ h1 {
     width: 100%;
   }
 }
-
-
 
 .flip {
   transform: rotateY(180deg);
