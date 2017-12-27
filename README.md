@@ -31,8 +31,9 @@ The main screen includes a timer, a move counter, a reset button, and a star rat
 
 Finishing the game with at most 15 moves yields a 3-star rating, finishing with more than 16 moves but at most 25 yields a 2-star rating, and finishing with more than 25 moves yields a 1-star rating. Here is an example end page:
 
-![End Page Sample](img/end-page.png)
-
+<p align="center">
+  <img src="img/end-page.png" alt="End Page Sample">
+</p>
 
 
 
