@@ -1,5 +1,9 @@
 # Memory Game
 
+<p align="center">
+  <img src="img/display.png" alt="Memory Game Page Sample Screenshot">
+</p>
+
 ### Running The Application
 
 The application can be run by clicking [here](https://wbchristerson.github.io/memory-game/). To download, you can clone the repository using this terminal command:
