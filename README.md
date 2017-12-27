@@ -26,7 +26,7 @@ second, obscuring the image and re-coloring as gray.
 The main screen includes a timer, a move counter, a reset button, and a star rating. Below is an example of the interface:
 
 <p align="center">
-  <img src="img/sample-game-state.png" alt="Memory Game Sample Page">
+  <img src="img/game-page.png" alt="Memory Game Sample Page">
 </p>
 
 Finishing the game with at most 15 moves yields a 3-star rating, finishing with more than 16 moves but at most 25 yields a 2-star rating, and finishing with more than 25 moves yields a 1-star rating. Here is an example end page:
@@ -34,8 +34,6 @@ Finishing the game with at most 15 moves yields a 3-star rating, finishing with 
 <p align="center">
   <img src="img/end-page.png" alt="End Page Sample">
 </p>
-
-
 
 ### Remaining Issues
 * When a card is flipped, its hidden image appears before it finishes flipping over. This is okay stylistically but I would prefer that the image appeared with a short delay of maybe about 200 milliseconds. I have tried to implement this with the jQuery `setTimeout` and `.delay()` functions, but have not been able to make it work correctly.
