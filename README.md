@@ -25,7 +25,9 @@ second, obscuring the image and re-coloring as gray.
 ### Design
 The main screen includes a timer, a move counter, a reset button, and a star rating. Below is an example of the interface:
 
-![Memory Game Sample](img/sample-game-state.png)
+<p align="center">
+  <img src="img/sample-game-state.png" alt="Memory Game Sample Page">
+</p>
 
 Finishing the game with at most 15 moves yields a 3-star rating, finishing with more than 16 moves but at most 25 yields a 2-star rating, and finishing with more than 25 moves yields a 1-star rating. Here is an example end page:
 
