@@ -148,6 +148,9 @@ h1 {
     width: 35%;
     margin: 5% auto;
     border-radius: 10px;
+}
+
+.play-again:hover {
     box-shadow: 2px 2px black;
 }
 
