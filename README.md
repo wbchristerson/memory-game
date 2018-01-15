@@ -39,5 +39,9 @@ Finishing the game with at most 15 moves yields a 3-star rating, finishing with 
   <img src="img/end-page.png" alt="End Page Sample">
 </p>
 
+### Acknowledgments
+
+This project is based on a skeleton structure from Udacity. For more information, see the initial commit for this repository.
+
 ### Remaining Issues
 * When a card is flipped, its hidden image appears before it finishes flipping over. This is okay stylistically but I would prefer that the image appeared with a short delay of maybe about 200 milliseconds. I have tried to implement this with the jQuery `setTimeout` and `.delay()` functions, but have not been able to make it work correctly.
